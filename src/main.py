@@ -1,8 +1,10 @@
 import sys
+from math import sin, cos, sqrt, radians as rd
 import pyqtgraph as pg
 import numpy as np
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QGridLayout, QPushButton, QLabel
 from PyQt5.QtCore import Qt
+from PyQt5 import uic
 
 
 class MainWindow(QMainWindow):
@@ -10,52 +12,99 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.initUI()
+        self.make_build()
+        self.clear_all()
 
     def initUI(self):
-        self.setGeometry(300, 300, 1000, 700)
-        self.setWindowTitle("Визуальная кинематика")
+        uic.loadUi('form.ui', self)
 
-        hour = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        temperature = [30, 32, 34, 32, 33, 31, 29, 32, 35, 45]
+        self.pen = pg.mkPen(color=(255, 0, 0), width=2)
+        self.styles = {"color": "red", "font-size": "20px"}
 
-        self.widgets = []
-        self.layouts = []
-        self.graphs = []
+        self.button_build.clicked.connect(self.make_build)
 
-        pen = pg.mkPen(color=(255, 0, 0), width=2)
+    def make_build(self):
+        self.build_graph_x()
+        self.build_graph_y()
 
-        y = 10
+    def clear_all(self):
+        self.graphic1.clear()
+        self.graphic2.clear()
 
-        for _ in range(3):
-            self.widgets.append(QWidget(self))
-            self.widgets[-1].resize(300, 300)
-            self.widgets[-1].move(10, y)
+    def build_graph_x(self):
+        self.graphic1.clear()
+        self.graphic1.setBackground("w")
+        self.graphic1.showGrid(x=True, y=True)
 
-            self.graphs.append(pg.PlotWidget())
+        self.graphic1.setLabel("left", "Координата, x", **self.styles)
+        self.graphic1.setLabel("bottom", "Время, t", **self.styles)
 
-            self.graphs[-1].setBackground("w")
-            self.graphs[-1].setTitle("")
-            self.graphs[-1].showGrid(x=True, y=True)
+        array = get_array_x(self.get_x_start(), self.get_speed(), self.get_alpha(),
+                            self.get_time())
+        self.graphic1.plot(*array, pen=self.pen)
 
-            # self.graphs[-1].plot(hour, temperature, pen=pen)
+    def build_graph_y(self):
+        self.graphic2.clear()
+        self.graphic2.setBackground("w")
+        self.graphic2.showGrid(x=True, y=True)
 
-            self.central = QWidget(self)
-            self.central.resize(300, 300)
+        self.graphic2.setLabel("left", "Координата, y", **self.styles)
+        self.graphic2.setLabel("bottom", "Время, t", **self.styles)
 
-            self.layouts.append(QGridLayout(self.widgets[-1]))
-            self.layouts[-1].addWidget(self.graphs[-1])
+        array = get_array_y(self.get_y_start(), self.get_speed(), self.get_alpha(), self.get_g())
+        self.graphic2.plot(*array, pen=self.pen)
 
-            y += 310
+    def get_y_start(self):
+        return float(self.input_y.text())
 
-        styles = {"color": "red", "font-size": "20px"}
+    def get_x_start(self):
+        return float(self.input_x.text())
 
-        self.graphs[0].setLabel("left", "Координата, x", **styles)
-        self.graphs[0].setLabel("bottom", "Время, t", **styles)
-        self.graphs[0].plot(hour, temperature, pen=pen)
+    def get_speed(self):
+        return float(self.input_speed.text())
 
-        self.graphs[1].setLabel("left", "Координата, y", **styles)
-        self.graphs[1].setLabel("bottom", "Время, t", **styles)
-        self.graphs[1].plot(hour[::-1], temperature, pen=pen)
+    def get_alpha(self):
+        return float(self.input_alpha.text())
+
+    def get_g(self):
+        return float(self.input_g.text())
+
+    def get_time(self):
+        return get_flight_time(self.get_y_start(), self.get_speed(), self.get_alpha(), self.get_g())
+
+
+def get_array_y(y_start, speed, alpha, g):
+    array = [[], []]
+
+    t = 0.0
+    while True:
+        y = y_start + (sin(rd(alpha)) * speed * t) - ((g * t ** 2) / 2)
+        t += 0.001
+
+        if y < 0:
+            return array
+
+        array[0].append(t)
+        array[1].append(y)
+
+
+def get_array_x(x_start, speed, alpha, time):
+    array = [[], []]
+
+    t = 0.0
+    while True:
+        x = x_start + (cos(rd(alpha)) * speed * t)
+        t += 0.001
+
+        if t > time:
+            return array
+
+        array[0].append(t)
+        array[1].append(x)
+
+
+def get_flight_time(y_start, speed, alpha, g):
+    return (speed * sin(rd(alpha)) + sqrt((speed * sin(rd(alpha))) ** 2 + 2 * g * y_start)) / g
 
 
 def except_hook(cls, exception, traceback):
