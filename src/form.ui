@@ -6,175 +6,366 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>565</height>
+    <width>879</width>
+    <height>938</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Visualization of kinematics</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="PlotWidget" name="graphic1">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>20</y>
-      <width>291</width>
-      <height>231</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="input_speed">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>110</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>10</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>110</y>
-      <width>131</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Начальная скорость (м/с)</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="input_alpha">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>140</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>30</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>140</y>
-      <width>111</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Угол к горизонту (°)</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="input_x">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>80</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>0</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>80</y>
-      <width>151</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Начальная координата x (м)</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="input_y">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>50</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>0</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>50</y>
-      <width>151</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Начальная координата y (м)</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="button_build">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>200</y>
+      <x>500</x>
+      <y>250</y>
       <width>311</width>
-      <height>23</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
      <string>Построить графики</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QListWidget" name="points_list">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>170</y>
-      <width>201</width>
-      <height>20</height>
+      <x>40</x>
+      <y>20</y>
+      <width>301</width>
+      <height>221</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>360</y>
+      <width>801</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Графики</string>
+    </property>
+    <widget class="PlotWidget" name="graphic2">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>30</y>
+       <width>331</width>
+       <height>231</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="PlotWidget" name="graphic1">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>30</y>
+       <width>331</width>
+       <height>231</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="PlotWidget" name="graphic3">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>280</y>
+       <width>331</width>
+       <height>231</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="PlotWidget" name="graphic4">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>280</y>
+       <width>331</width>
+       <height>231</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>20</y>
+      <width>451</width>
+      <height>221</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Настройки точки</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <widget class="QLineEdit" name="input_name">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>20</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Normal</enum>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="input_y">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>50</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Normal</enum>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="input_x">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>80</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>80</y>
+       <width>151</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Начальная координата x (м)</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>110</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Начальная скорость (м/с)</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>20</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Название точки</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="input_speed">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>110</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>140</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Угол к горизонту (°)</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>50</y>
+       <width>151</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Начальная координата y (м)</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="input_alpha">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>140</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="button_color">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>172</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>170</y>
+       <width>71</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Выбор цвета</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="button_add">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>250</y>
+      <width>301</width>
+      <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Ускорение свободного падения (м/с²)</string>
+     <string>Добавить точку</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="input_g">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>170</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>9.81</string>
-    </property>
-   </widget>
-   <widget class="PlotWidget" name="graphic2">
+   <widget class="QPushButton" name="button_del_current">
     <property name="geometry">
      <rect>
       <x>40</x>
       <y>280</y>
-      <width>291</width>
-      <height>231</height>
+      <width>141</width>
+      <height>23</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>Удалить текущее</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_del_select">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>280</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Удалить выбранное</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_select_all">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>310</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Выбрать все</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_unselect_all">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>310</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Очистить выбор</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radiobutton_all">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>310</y>
+      <width>82</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Все точки</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radiobutton_selected">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>330</y>
+      <width>151</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Только выбранные точки</string>
     </property>
    </widget>
   </widget>
@@ -183,12 +374,53 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>879</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Настройки</string>
+    </property>
+    <addaction name="action_const"/>
+    <addaction name="action_colors"/>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="action_save"/>
+    <addaction name="action_load"/>
+   </widget>
+   <addaction name="menu_3"/>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_2">
+   <property name="text">
+    <string>что?</string>
+   </property>
+  </action>
+  <action name="action_save">
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+  </action>
+  <action name="action_load">
+   <property name="text">
+    <string>Загрузить</string>
+   </property>
+  </action>
+  <action name="action_const">
+   <property name="text">
+    <string>Константы</string>
+   </property>
+  </action>
+  <action name="action_colors">
+   <property name="text">
+    <string>Цвета</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
